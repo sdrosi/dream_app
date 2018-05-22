@@ -16,7 +16,7 @@
 $(document).ready(function() {
     // Getting a reference to the input field where user adds a new todo
     var $newItemInput = $("input.new-item");
-    var $newPrivacyInput = $("#private option:selected").text();
+    var $newPrivacyInput = $("#private option:selected");
     // Our new todos will go inside the todoContainer
     var $todoContainer = $(".todo-container");
     // Adding event listeners for deleting, editing, and adding todos
@@ -146,14 +146,14 @@ $(document).ready(function() {
 
       var todo = {
         text: $newItemInput.val().trim(),
-        private: $newPrivacyInput,
+        private: $newPrivacyInput.val(),
         // polarity: textPolarity,
         complete: false
       };
   
       $.post("/api/todos", todo, getTodos);
       $newItemInput.val("");
-      $("private").val("");
+      $newPrivacyInput.val("");
     }
   });
   
