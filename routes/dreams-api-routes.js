@@ -16,7 +16,7 @@ module.exports = function (app) {
     });
 
     //GET route for retrieving a single dream
-    app.get("/", function (req, res) {
+    app.get("/api", function (req, res) {
         db.Dreams.findOne({
             where: {
                 id: re.params.id
@@ -28,14 +28,14 @@ module.exports = function (app) {
     });
 
     // POST route for saving a new Dream
-    app.post("/", function (req, res) {
+    app.post("/api/add", function (req, res) {
         db.Dreams.create(req.body).then(function (dbDreams) {
             res.json(dbDreams)
         });
     });
 
     // DELETE route for deleting Dream
-    app.delete("/", function (req, res) {
+    app.delete("/api/delete", function (req, res) {
         db.Dream.destroy({
             where: {
                 id: req.params.id
