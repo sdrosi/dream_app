@@ -84,16 +84,48 @@ module.exports = function(app) {
   app.put("/api/todos", function(req, res) {
     // Update takes in an object describing the properties we want to update, and
     // we use where to describe which objects we want to update
-    db.Aylien.update({
-      text: req.body.text,
-      complete: req.body.complete
-    }, {
-      where: {
-        id: req.body.id
-      }
-    }).then(function(dbTodo) {
-      res.json(dbTodo);
+    var textPolarity = "";
+    var AYLIENTextAPI = require('aylien_textapi');
+    var textapi = new AYLIENTextAPI({
+    application_id: keys.aylien.application_id,
+    application_key: keys.aylien.application_key
     });
+
+    textapi.sentiment({
+        'text': req.body.text
+    }, function(error, response) {
+        if (error === null) {
+        console.log("Sentiment Response: " + response);
+        textPolarity = response.polarity;
+        db.Aylien.update({
+            text: req.body.text,
+            // private: req.body.private,
+            polarity: textPolarity,
+            complete: req.body.complete
+          }, {
+              where: {
+                  id: req.body.id
+              }
+          }).then(function(dbTodo) {
+            // We have access to the new todo as an argument inside of the callback function
+            console.log(dbTodo)
+            res.json(dbTodo);
+          });
+
+        }
+    });
+    // db.Aylien.update({
+    //   text: req.body.text,
+    //   complete: req.body.complete
+    // }, {
+    //   where: {
+    //     id: req.body.id
+    //   }
+    // }).then(function(dbTodo) {
+    //   res.json(dbTodo);
+    // });
+
+    // Ending bracket
   });
 
 };
