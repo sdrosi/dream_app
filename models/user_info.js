@@ -14,18 +14,18 @@ module.exports = function(sequelize, DataTypes) {
         allowNull: false,
     },
     userName:{
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     },
     password: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
     }
     });
   
     User.associate = function(models) {
       
-      Author.hasMany(models.Dream, {
+      User.hasMany(models.Dream, {
         onDelete: "cascade"
       });
     };
