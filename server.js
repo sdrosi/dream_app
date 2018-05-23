@@ -6,6 +6,9 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var db = require('./models');
 
+// Passport set up
+const passportSetup = require('./config/passport-setup');
+
 // CREATE SERVER
 var app = express();
 var PORT = process.env.PORT || 8000;
