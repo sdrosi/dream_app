@@ -23,6 +23,10 @@ app.set('view engine', 'handlebars');
 app.use(require('./routes/main'))
 app.use(require('./routes/api'))
 
+// Auth routes
+const authRoutes = require('./routes/auth-routes');
+app.use('/auth', authRoutes)
+
 // RUN SERVER
 db.sequelize.sync({}).then(function() {
   app.listen(PORT, function() {
