@@ -9,26 +9,51 @@ $(document).ready(function () {
 
   // This function grabs dreams from the database and updates the view
   function getDreams(category) {
-
+    var categoryString = category || "";
+    if (categoryString) {
+      categoryString = "/category/" + categoryStrings;
+    }
+    $.get("/api/dreams" + cateogyString, function (data) {
+      console.log("Dreams", data);
+      post = data;
+      if (!posts || !posts.length) {
+        displayEmpty();
+      }
+      else {
+        initializeRows();
+      }
+    });
   }
 
 
   // This function does an API call to delete dreamss
   function deleteDream(id) {
-
+    $.ajax({
+      method: "DELETE",
+      url: "/api/posts/" + id
+    })
+      .then(function () {
+        getPosts(dreamsCategorySelect.val());
+      });
   }
+
   // Getting the initial list of dreams
   getDreams();
 
   // InitializeRows handles appending all of our constructed post HTML inside
   // blogContainer
   function initializeRows() {
-
+    blogContainer.empty();
+    var postsToAdd = [];
+    for (var i = 0; i < dreams.length; i++) {
+      postsToAdd.push(createNewRow(posts[i]));
+    }
+    blogContainer.append(dreamsToAdd);
   }
 
   // This function constructs a dream's HTML
   function createNewRow(dream) {
-
+    
   }
 
   // This function figures out which dream we want to delete and then calls
