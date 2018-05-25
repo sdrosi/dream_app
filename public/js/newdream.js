@@ -7,14 +7,14 @@ $(document).ready(function() {
 
   // If we have this section in our url, we pull out the post id from the url
   // In localhost:8080/cms?post_id=1, postId is 1
-  if (url.indexOf("?post_id=") !== -1) {
+  if (url.indexOf("?dream_id=") !== -1) {
     postId = url.split("=")[1];
     getPostData(postId);
   }
 
   // Getting jQuery references to the post body, title, form, and category select
   var title = $("#title");
-  var mood = $("#mood option:selected");
+  var mood = $("#mood");
   var dream = $("#dream_input");
   var postPrivacy = $("#privacy");
   var cmsForm = $("#cms");
@@ -57,12 +57,21 @@ $(document).ready(function() {
 
   // Gets post data for a post if we're editing
   function getPostData(id) {
-    $.get("/update/dream/" + id, function(data) {
+    $.get("/update-dream/" + id, function(data) {
       if (data) {
         // If this post exists, prefill our cms forms with its data
-        titleInput.val(data.title);
-        bodyInput.val(data.body);
-        postCategorySelect.val(data.category);
+        title.val(data.title);
+        dream.val(data.dream);
+        if (data.privacy === false) {
+          postPrivacy.val("0")
+        }
+
+        else if (data.privacy === true) {
+          postPrivacy.val("1")
+        }
+        console.log("Mood: " + data.mood)
+        mood.val(data.mood)
+
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
         updating = true;
@@ -74,11 +83,11 @@ $(document).ready(function() {
   function updatePost(post) {
     $.ajax({
       method: "PUT",
-      url: "/api/posts",
+      url: "/add-dream",
       data: post
     })
       .then(function() {
-        window.location.href = "/blog";
+        window.location.href = "/my-dreams";
       });
   }
 });

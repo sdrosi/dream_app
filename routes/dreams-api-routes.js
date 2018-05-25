@@ -24,10 +24,10 @@ module.exports = function (app) {
     });
 
     //GET route for retrieving a single dream
-    app.get("/update-dream", function (req, res) {
+    app.get("/update-dream/:id", function (req, res) {
         db.Dream.findOne({
             where: {
-                id: re.params.id
+                id: req.params.id
             }
         }).then(function (dbDreams) {
             console.log(dbDreams);
@@ -69,7 +69,7 @@ module.exports = function (app) {
     });
 
     // DELETE route for deleting Dream
-    app.delete("/api/delete", function (req, res) {
+    app.delete("/delete-dream/:id", function (req, res) {
         db.Dream.destroy({
             where: {
                 id: req.params.id
@@ -80,7 +80,7 @@ module.exports = function (app) {
     });
 
     //PUT route for updating Dream
-    app.put("/update/dream", function (req, res) {
+    app.put("/add-dream", function (req, res) {
         console.log(req.body);
         var textPolarity = "";
         var confPolarity = "";

@@ -3,8 +3,8 @@ $(document).ready(function () {
   var dreamContainer = $("#dream-container");
   var privacySetting = $("#privacy");
   //click events for the edit and delete button
-  $(document).on("click", "button.delete", handleDreamsDelete);
-  $(document).on("click", "button.edit", handleDreamsEdit);
+  $(document).on("click", "td.delete", handleDreamsDelete);
+  $(document).on("click", "td.edit", handleDreamsEdit);
   privacySetting.on("change", handleCategoryChange);
   var dreams;
 
@@ -32,10 +32,10 @@ $(document).ready(function () {
   function deleteDream(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/dreams/" + id
+      url: "/delete-dream/" + id
     })
       .then(function () {
-        getDreams(dreamsCategorySelect.val());
+        getDreams(privacySetting.val());
       });
   }
 
@@ -72,11 +72,11 @@ $(document).ready(function () {
 
     var deleteBtn = $("<td><button>");
     deleteBtn.text("x");
-    deleteBtn.addClass("button is-danger is-inverted");
+    deleteBtn.addClass("delete button is-danger is-inverted");
 
     var editBtn = $("<td><button is-primary is-inverted>");
     editBtn.text("EDIT");
-    editBtn.addClass("button is-primary is-inverted");
+    editBtn.addClass("edit button is-primary is-inverted");
 
     var newPostTitle = $("<td>");
     newPostTitle.addClass("newPostTitle");
@@ -134,10 +134,10 @@ $(document).ready(function () {
   // Appropriate url
   function handleDreamsEdit() {
     var currentDream = $(this)
-    .parent()
-    .parent()
-    .data("dream");
-    window.location.href = "/update-dream?dream_id=" + currentDream.id;
+      .parent()
+      .parent()
+      .data("dream");
+    window.location.href = "/new-dream?dream_id=" + currentDream.id;
   }
 
   // This function displays a message when there are no dreams
