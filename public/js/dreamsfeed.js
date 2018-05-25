@@ -53,7 +53,43 @@ $(document).ready(function () {
 
   // This function constructs a dream's HTML
   function createNewRow(dream) {
-   
+    var newDreamCard = $("<div>");
+    newDreamCard.addClass("card");
+    var newDreamCardHeading = $("<div>");
+    newDreamCardHeading.addClass("card-header");
+    var deleteBtn = $("<button>");
+    deletBtn.text("x");
+    deleteBtn.addClass("delete btn btn-danger");
+    var editBtn = $("<button>");
+    editBtn.text("EDIT");
+    editBtn.addClass("edit btn btn-default");
+    var newDreamTitle = $("<h2>");
+    var newDreamDate = $("<small>");
+    var newDreamCategory = $("<h5>");
+    newDreamCategory.text(dream.category);
+    newDreamCategory.css({
+      float: "right",
+      "font-weight" : "700",
+      "margin-top" : "-15px"
+    });
+    var newDreamCardBody = $("<div>");
+    newDreamCardBody.addClass("card-body");
+    var newDreamBody = $("<p>");
+    newDreamTitle.text(dream.title + " ");
+    newDreamBody.text(dream.body);
+    var formattedDate = new Date(dream.createdAt);
+    formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
+    newDreamDate.text(formattedDate);
+    newDreamTitle.append(newPostDate);
+    newDreamCardHeading.append(deleteBtn);
+    newDreamCardHeading.append(editBtn);
+    newDreamCardHeading.append(newPostTitle);
+    newDreamCardHeading.append(newPostCategory);
+    newDreamCardBody.append(newPostBody);
+    newDreamCard.append(newPostCardHeading);
+    newDreamCard.append(newPostCardBody);
+    newDreamCard.data("post", post);
+    return newDreamCard;
   }
 
   // This function figures out which dream we want to delete and then calls
