@@ -86,9 +86,9 @@ $(document).ready(function () {
 
   // This function handles reloading new dreams when the category changes
   function handleCategoryChange() {
-
+    var newDreamCategory = $(this).val();
+    getDreams(newDreamCategory);
   }
-
 
 });
 
