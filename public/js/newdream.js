@@ -51,7 +51,7 @@ $(document).ready(function() {
   // Submits a new post and brings user to blog page upon completion
   function submitPost(Post) {
     $.post("/add-dream/", Post, function() {
-      window.location.href = "/mydreams";
+      window.location.href = "/my-dreams";
     });
   }
 

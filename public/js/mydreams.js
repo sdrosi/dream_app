@@ -1,21 +1,23 @@
 $(document).ready(function () {
   //dream container that holds all dreams posted.
   var dreamContainer = $(".dream-container");
-  var privacySetting = $("#privacy-setting");
+  var privacySetting = $("#privacy");
   //click events for the edit and delete button
   $(document).on("click", "button.delete", handleDreamsDelete);
   $(document).on("click", "button.edit", handleDreamsEdit);
   privacySetting.on("change", handleCategoryChange);
+  var dreams;
 
   // This function grabs dreams from the database and updates the view
   function getDreams(category) {
     var categoryString = category || "";
     if (categoryString) {
-      categoryString = "/category/" + categoryStrings;
+      categoryString = "/privacy/" + categoryString;
+      console.log("Category String:" + categoryString)
     }
-    $.get("/api/dreams" + cateogyString, function (data) {
+    $.get("/social-feed" + categoryString, function (data) {
       console.log("Dreams", data);
-      post = data;
+      dreams = data;
       if (!dreams || !dreams.length) {
         displayEmpty();
       }
@@ -43,58 +45,68 @@ $(document).ready(function () {
   // InitializeRows handles appending all of our constructed post HTML inside
   // blogContainer
   function initializeRows() {
-    blogContainer.empty();
-    var postsToAdd = [];
+    dreamContainer.empty();
+    var dreamsToAdd = [];
     for (var i = 0; i < dreams.length; i++) {
-      postsToAdd.push(createNewRow(posts[i]));
+      dreamsToAdd.push(createNewRow(dreams[i]));
     }
-    blogContainer.append(dreamsToAdd);
+    dreamContainer.append(dreamsToAdd);
   }
 
   // This function constructs a dream's HTML
-  function createNewRow(dream) {
-    var newDreamCard = $("<div>");
-    newDreamCard.addClass("box");
-    var newDreamCardHeading = $("<div>");
-    newDreamCardHeading.addClass("card-header");
+  function createNewRow(post) {
+    console.log(post);
+    var postPrivacy;
+    if (post.privacy === true) {
+      postPrivacy = "Private"
+    }
+    else if (post.privacy === false) {
+      postPrivacy = "Public"
+    }
+
+    var newPostCard = $("<div>");
+    newPostCard.addClass("card");
+    var newPostCardHeading = $("<div>");
+    newPostCardHeading.addClass("card-header");
     var deleteBtn = $("<button>");
-    deletBtn.text("x");
+    deleteBtn.text("x");
     deleteBtn.addClass("delete btn btn-danger");
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-default");
-    var newDreamTitle = $("<h2>");
-    var newDreamDate = $("<small>");
-    var newDreamCategory = $("<h5>");
-    newDreamCategory.text(dream.category);
-    newDreamCategory.css({
+    var newPostTitle = $("<h2>");
+    var newPostDate = $("<small>");
+    var newPostCategory = $("<h5>");
+    newPostCategory.text(postPrivacy);
+    newPostCategory.css({
       float: "right",
-      "font-weight" : "700",
-      "margin-top" : "-15px"
+      "font-weight": "700",
+      "margin-top":
+      "-15px"
     });
-    var newDreamCardBody = $("<div>");
-    newDreamCardBody.addClass("card-body");
-    var newDreamBody = $("<p>");
-    newDreamTitle.text(dream.title + " ");
-    newDreamBody.text(dream.body);
-    var formattedDate = new Date(dream.createdAt);
+    var newPostCardBody = $("<div>");
+    newPostCardBody.addClass("card-body");
+    var newPostBody = $("<p>");
+    newPostTitle.text(post.title + " ");
+    newPostBody.text(post.dream);
+    var formattedDate = new Date(post.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    newDreamDate.text(formattedDate);
-    newDreamTitle.append(newDreamDate);
-    newDreamCardHeading.append(deleteBtn);
-    newDreamCardHeading.append(editBtn);
-    newDreamCardHeading.append(newPostTitle);
-    newDreamCardHeading.append(newDreamCategory);
-    newDreamCardBody.append(newDreamBody);
-    newDreamCard.append(newDreamCardHeading);
-    newDreamCard.append(newDreamCardBody);
-    newDreamCard.data("dream", dream);
-    return newDreamCard;
+    newPostDate.text(formattedDate);
+    newPostTitle.append(newPostDate);
+    newPostCardHeading.append(deleteBtn);
+    newPostCardHeading.append(editBtn);
+    newPostCardHeading.append(newPostTitle);
+    newPostCardHeading.append(newPostCategory);
+    newPostCardBody.append(newPostBody);
+    newPostCard.append(newPostCardHeading);
+    newPostCard.append(newPostCardBody);
+    newPostCard.data("dream", post);
+    return newPostCard;
   }
 
   // This function figures out which dream we want to delete and then calls
   // deletePost
-  function handleDreamDelete() {
+  function handleDreamsDelete() {
     var currentDream = $(this)
     .parent()
     .parent()
@@ -103,12 +115,12 @@ $(document).ready(function () {
   }
   // This function figures out which dream we want to edit and takes it to the
   // Appropriate url
-  function handleDreamEdit() {
+  function handleDreamsEdit() {
     var currentDream = $(this)
     .parent()
     .parent()
     .data("dream");
-    window.location.href = "/cms?dream_id=" + currentDream.id;
+    window.location.href = "/update-dream?dream_id=" + currentDream.id;
   }
 
   // This function displays a message when there are no dreams
