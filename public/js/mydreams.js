@@ -1,6 +1,6 @@
 $(document).ready(function () {
   //dream container that holds all dreams posted.
-  var dreamContainer = $(".dream-container");
+  var dreamContainer = $("#dream-container");
   var privacySetting = $("#privacy");
   //click events for the edit and delete button
   $(document).on("click", "button.delete", handleDreamsDelete);
@@ -64,43 +64,60 @@ $(document).ready(function () {
       postPrivacy = "Public"
     }
 
-    var newPostCard = $("<div>");
+    var newPostCard = $("<tr>");
     newPostCard.addClass("card");
-    var newPostCardHeading = $("<div>");
+
+    var newPostCardHeading = $("<td>");
     newPostCardHeading.addClass("card-header");
-    var deleteBtn = $("<button>");
+
+    var deleteBtn = $("<td><button>");
     deleteBtn.text("x");
-    deleteBtn.addClass("delete btn btn-danger");
-    var editBtn = $("<button>");
+    deleteBtn.addClass("button is-danger is-inverted");
+
+    var editBtn = $("<td><button is-primary is-inverted>");
     editBtn.text("EDIT");
-    editBtn.addClass("edit btn btn-default");
-    var newPostTitle = $("<h2>");
-    var newPostDate = $("<small>");
-    var newPostCategory = $("<h5>");
+    editBtn.addClass("button is-primary is-inverted");
+
+    var newPostTitle = $("<td>");
+    newPostTitle.addClass("newPostTitle");
+
+    var newPostDate = $("<td>");
+    newPostDate.addClass("post-date")
+
+    var newPostCategory = $("<td>");
     newPostCategory.text(postPrivacy);
-    newPostCategory.css({
-      float: "right",
-      "font-weight": "700",
-      "margin-top":
-      "-15px"
-    });
-    var newPostCardBody = $("<div>");
+    newPostCategory.addClass("post-category")
+
+    var newPostCardBody = $("<td>");
     newPostCardBody.addClass("card-body");
-    var newPostBody = $("<p>");
+
+    var newPostBody = $("<td>");
+    newPostBody.addClass("post-body");
+
     newPostTitle.text(post.title + " ");
+
     newPostBody.text(post.dream);
+
     var formattedDate = new Date(post.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     newPostDate.text(formattedDate);
-    newPostTitle.append(newPostDate);
+
+    // newPostTitle.append(newPostDate);
+
     newPostCardHeading.append(deleteBtn);
     newPostCardHeading.append(editBtn);
-    newPostCardHeading.append(newPostTitle);
+    // newPostCardHeading.append(newPostTitle);
     newPostCardHeading.append(newPostCategory);
+    newPostCardHeading.append(newPostDate);
+
+
+    newPostCardBody.append(newPostTitle);
     newPostCardBody.append(newPostBody);
+
     newPostCard.append(newPostCardHeading);
     newPostCard.append(newPostCardBody);
     newPostCard.data("dream", post);
+
     return newPostCard;
   }
 
