@@ -14,7 +14,7 @@
 
 </head>
 
-<body>
+<body  id="hero-photo-one">
         <nav class="navbar" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                   <a class="navbar-item" href="/">
@@ -22,9 +22,6 @@
                   </a>
               
                   <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-                      <a class="navbar-item" href="/">
-                        Home
-                      </a>
                       <a class="navbar-item" href="/new-dream">
                         New Dream
                       </a>
@@ -40,7 +37,7 @@
             
 
 
-  <div class="container" id="hero-photo-one">
+  <div class="container">
     <div class="row">
       <div class="row">
         <div class="col-sm-2 mt-4">
@@ -50,13 +47,13 @@
       <div class="col-md-5 offset-md-3">
         <form id="cms">
           <div class="form-group">
-            <label for="title">Title:</label>
+            <label for="title" id="label-font">Title:</label>
             <input type="text" class="form-control" id="title">
             <br />
-            <label for="body">Body:</label>
+            <label for="body" id="label-font">Body:</label>
             <textarea class="form-control" rows="10" id="dream_input"></textarea>
             <div class="form-group">
-              <label for="category">Select Category:</label>
+              <label for="category" id="label-font">Select Category:</label>
               <select class="custom-select" id="privacy">
                 <option value="1">Private</option>
                 <option value="0">Public</option>
@@ -64,7 +61,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label for="category">Select Category:</label>
+              <label for="category" id="label-font">Select Category:</label>
               <select class="custom-select" id="mood">
                 <option value="Happy">Happy</option>
                 <option value="Sad">Sad</option>
