@@ -33,7 +33,7 @@ $(document).ready(function () {
       url: "/api/dreams/" + id
     })
       .then(function () {
-        getPosts(dreamsCategorySelect.val());
+        getDreams(dreamsCategorySelect.val());
       });
   }
 
@@ -80,7 +80,7 @@ $(document).ready(function () {
     var formattedDate = new Date(dream.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     newDreamDate.text(formattedDate);
-    newDreamTitle.append(newPostDate);
+    newDreamTitle.append(newDreamDate);
     newDreamCardHeading.append(deleteBtn);
     newDreamCardHeading.append(editBtn);
     newDreamCardHeading.append(newDreamTitle);

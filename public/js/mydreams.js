@@ -33,7 +33,7 @@ $(document).ready(function () {
       url: "/api/dreams/" + id
     })
       .then(function () {
-        getPosts(dreamsCategorySelect.val());
+        getDreams(dreamsCategorySelect.val());
       });
   }
 
