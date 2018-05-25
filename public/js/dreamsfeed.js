@@ -13,7 +13,7 @@ $(document).ready(function () {
     if (categoryString) {
       categoryString = "/category/" + categoryStrings;
     }
-    $.get("/api/dreams" + cateogyString, function (data) {
+    $.get("/" + cateogyString, function (data) {
       console.log("Dreams", data);
       dream = data;
       if (!dreams || !dreams.length) {
@@ -30,7 +30,7 @@ $(document).ready(function () {
   function deleteDream(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/postdreams/" + id
+      url: "/api/delete/" + id
     })
       .then(function () {
         getDreams(dreamsCategorySelect.val());
