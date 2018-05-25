@@ -15,7 +15,7 @@ $(document).ready(function () {
     }
     $.get("/" + cateogyString, function (data) {
       console.log("Dreams", data);
-      dream = data;
+      post = data;
       if (!dreams || !dreams.length) {
         displayEmpty();
       }
@@ -31,6 +31,7 @@ $(document).ready(function () {
     $.ajax({
       method: "DELETE",
       url: "/api/delete/" + id
+
     })
       .then(function () {
         getDreams(dreamsCategorySelect.val());

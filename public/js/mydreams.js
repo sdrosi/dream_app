@@ -15,7 +15,7 @@ $(document).ready(function () {
     }
     $.get("/api/dreams" + cateogyString, function (data) {
       console.log("Dreams", data);
-      dream = data;
+      post = data;
       if (!dreams || !dreams.length) {
         displayEmpty();
       }
@@ -54,7 +54,7 @@ $(document).ready(function () {
   // This function constructs a dream's HTML
   function createNewRow(dream) {
     var newDreamCard = $("<div>");
-    newDreamCard.addClass("card");
+    newDreamCard.addClass("box");
     var newDreamCardHeading = $("<div>");
     newDreamCardHeading.addClass("card-header");
     var deleteBtn = $("<button>");
@@ -83,7 +83,7 @@ $(document).ready(function () {
     newDreamTitle.append(newDreamDate);
     newDreamCardHeading.append(deleteBtn);
     newDreamCardHeading.append(editBtn);
-    newDreamCardHeading.append(newDreamTitle);
+    newDreamCardHeading.append(newPostTitle);
     newDreamCardHeading.append(newDreamCategory);
     newDreamCardBody.append(newDreamBody);
     newDreamCard.append(newDreamCardHeading);
