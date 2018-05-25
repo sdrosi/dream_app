@@ -17,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     polarity: {
       type: DataTypes.STRING,
-      defaultValue: "neutral"
+      allowNull: false
     },
     polarity_confidence: {
       type: DataTypes.DECIMAL
