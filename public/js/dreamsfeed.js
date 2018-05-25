@@ -53,23 +53,35 @@ $(document).ready(function () {
 
   // This function constructs a dream's HTML
   function createNewRow(dream) {
-    
+   
   }
 
   // This function figures out which dream we want to delete and then calls
   // deletePost
   function handleDreamDelete() {
-
+    var currentDream = $(this)
+    .parent()
+    .parent()
+    .data("dream");
+    deleteDream(currentDream.id);
   }
   // This function figures out which dream we want to edit and takes it to the
   // Appropriate url
   function handleDreamEdit() {
-
+    var currentDream = $(this)
+    .parent()
+    .parent()
+    .data("dream");
+    window.location.href = "/cms?dream_id=" + currentDream.id;
   }
 
   // This function displays a message when there are no dreams
   function displayEmpty() {
-
+    dreamContainer.empty();
+    var messageH2 = $("<h2>");
+    messageH2.css({ "text-align": "center", "margin-top": "50px" });
+    messageH2.html("No posts yet for this category, navigate <a href='/cms'>here</a> in order to create a new dream.");
+    dreamContainer.append(messageH2);
   }
 
   // This function handles reloading new dreams when the category changes
