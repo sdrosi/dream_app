@@ -50,14 +50,14 @@ $(document).ready(function() {
 
   // Submits a new post and brings user to blog page upon completion
   function submitPost(Post) {
-    $.post("/api/posts/", Post, function() {
-    //   window.location.href = "/blog";
+    $.post("/add-dream/", Post, function() {
+      window.location.href = "/mydreams";
     });
   }
 
   // Gets post data for a post if we're editing
   function getPostData(id) {
-    $.get("/api/posts/" + id, function(data) {
+    $.get("/update/dream/" + id, function(data) {
       if (data) {
         // If this post exists, prefill our cms forms with its data
         titleInput.val(data.title);
