@@ -64,7 +64,7 @@ $(document).ready(function () {
     var editBtn = $("<button>");
     editBtn.text("EDIT");
     editBtn.addClass("edit btn btn-default");
-    var newDreamTitle = $("<h2>");
+    var newDreamTitle = $("<h2>", id="dream-title");
     var newDreamDate = $("<small>");
     var newDreamCategory = $("<h5>");
     newDreamCategory.text(dream.category);
