@@ -1,4 +1,5 @@
 var db = require("../models");
+var keys = require("../config/aylien_keys.js");
 
 module.exports = function (app) {
 
@@ -28,10 +29,36 @@ module.exports = function (app) {
     });
 
     // POST route for saving a new Dream
-    app.post("/api/add", function (req, res) {
-        db.Dreams.create(req.body).then(function (dbDreams) {
-            res.json(dbDreams)
+    app.post("/api/posts", function(req, res) {
+        console.log(req.body);
+        var textPolarity = "";
+        var confPolarity = "";
+        var AYLIENTextAPI = require('aylien_textapi');
+        var textapi = new AYLIENTextAPI({
+        application_id: keys.aylien.application_id,
+        application_key: keys.aylien.application_key
         });
+    
+        textapi.sentiment({
+            'text': req.body.dream
+        }, function(error, response) {
+            if (error === null) {
+            console.log("Sentiment Response: " + response);
+            textPolarity = response.polarity;
+            confPolarity = response.polarity_confidence;
+            db.Dream.create({
+                title: req.body.title,
+                mood: req.body.mood,
+                dream: req.body.dream,
+                privacy: req.body.privacy,
+                polarity: textPolarity,
+                polarity_confidence: confPolarity
+            })
+          .then(function(dbDream) {
+            res.json(dbDream);
+          });
+        };
+      });
     });
 
     // DELETE route for deleting Dream
