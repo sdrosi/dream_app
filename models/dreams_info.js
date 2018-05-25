@@ -24,5 +24,17 @@ module.exports = function(sequelize, DataTypes) {
     }
 
   });
+
+  Dream.associate = function(models) {
+    Dream.belongsTO(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return Dream;
 };
+
+
+
