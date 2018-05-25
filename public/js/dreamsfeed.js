@@ -13,7 +13,7 @@ $(document).ready(function () {
     if (categoryString) {
       categoryString = "/category/" + categoryStrings;
     }
-    $.get("/api/dreams" + cateogyString, function (data) {
+    $.get("/" + cateogyString, function (data) {
       console.log("Dreams", data);
       post = data;
       if (!dreams || !dreams.length) {

@@ -15,7 +15,7 @@ $(document).ready(function () {
     }
     $.get("/api/dreams" + cateogyString, function (data) {
       console.log("Dreams", data);
-      post = data;
+      dreams = data;
       if (!dreams || !dreams.length) {
         displayEmpty();
       }
