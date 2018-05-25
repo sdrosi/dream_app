@@ -1,35 +1,44 @@
-// This is server code just copied and pasted from the Bank Admin activity in the sequelize activities folder.
+// *****************************************************************************
+// Server.js - This file is the initial starting point for the Node/Express server.
+//
+// ******************************************************************************
+// *** Dependencies
+// =============================================================
+var express = require("express");
+var bodyParser = require("body-parser");
 
-// DEPENDENCIES
-var express = require('express');
-var bodyParser = require('body-parser');
-var exphbs = require('express-handlebars');
-var db = require('./models');
-
-// Passport set up
-const passportSetup = require('./config/passport-setup');
-
-// CREATE SERVER
+// Sets up the Express App
+// =============================================================
 var app = express();
-var PORT = process.env.PORT || 8000;
+var PORT = process.env.PORT || 8080;
 
-// MIDDLEWARE
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+// Requiring our models for syncing
+var db = require("./models");
+
+// Sets up the Express app to handle data parsing
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
+// parse application/json
+app.use(bodyParser.json());
+
+
+// Static directory
+app.use(express.static("public"));
 
 // // ROUTING
-// app.use(require('./routes/main'))
-// app.use(require('./routes/api'))
+require("./routes/dreams-api-routes.js")(app);
+require("./routes/html-api-routes.js")(app);
 
-// Auth routes
-const authRoutes = require('./routes/auth-routes');
-app.use('/auth', authRoutes)
+// Routes
+// =============================================================
+require("./routes/dreams-api-routes.js")(app);
+require("./routes/html-api-routes.js")(app);
 
-// RUN SERVER
-db.sequelize.sync({}).then(function() {
+// Syncing our sequelize models and then starting our Express app
+// =============================================================
+db.sequelize.sync({ force: true }).then(function() {
   app.listen(PORT, function() {
-    console.log('Server running at http://localhost:' + PORT)
-  })
-})
+    console.log("App listening on PORT " + PORT);
+  });
+});
