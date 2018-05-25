@@ -8,7 +8,7 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/api", function (req, res) {
+  app.get("/", function (req, res) {
     // Find one Author with the id in req.params.id and return them to the user with res.json
     db.User.findOne({
       where: {
@@ -19,7 +19,7 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/api/add", function (req, res) {
+  app.post("/", function (req, res) {
     // Create an Author with the data available to us in req.body
     console.log(req.body);
     db.User.create(req.body).then(function (dbUser) {
@@ -27,7 +27,7 @@ module.exports = function (app) {
     });
   });
 
-  app.delete("/api/delete", function (req, res) {
+  app.delete("/", function (req, res) {
     // Delete the Author with the id available to us in req.params.id
     db.User.destroy({
       where: {

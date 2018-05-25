@@ -22,8 +22,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+
 // Static directory
 app.use(express.static("public"));
+
+// // ROUTING
+require("./routes/dreams-api-routes.js")(app);
+require("./routes/html-api-routes.js")(app);
 
 // Routes
 // =============================================================
