@@ -16,7 +16,7 @@ $(document).ready(function () {
     $.get("/api/dreams" + cateogyString, function (data) {
       console.log("Dreams", data);
       post = data;
-      if (!posts || !posts.length) {
+      if (!dreams || !dreams.length) {
         displayEmpty();
       }
       else {
@@ -30,7 +30,7 @@ $(document).ready(function () {
   function deleteDream(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/posts/" + id
+      url: "/api/dreams/" + id
     })
       .then(function () {
         getPosts(dreamsCategorySelect.val());
@@ -83,12 +83,12 @@ $(document).ready(function () {
     newDreamTitle.append(newPostDate);
     newDreamCardHeading.append(deleteBtn);
     newDreamCardHeading.append(editBtn);
-    newDreamCardHeading.append(newPostTitle);
-    newDreamCardHeading.append(newPostCategory);
-    newDreamCardBody.append(newPostBody);
-    newDreamCard.append(newPostCardHeading);
-    newDreamCard.append(newPostCardBody);
-    newDreamCard.data("post", post);
+    newDreamCardHeading.append(newDreamTitle);
+    newDreamCardHeading.append(newDreamCategory);
+    newDreamCardBody.append(newDreamBody);
+    newDreamCard.append(newDreamCardHeading);
+    newDreamCard.append(newDreamCardBody);
+    newDreamCard.data("dream", dream);
     return newDreamCard;
   }
 
