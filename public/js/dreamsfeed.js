@@ -30,7 +30,7 @@ $(document).ready(function () {
   function deleteDream(id) {
     $.ajax({
       method: "DELETE",
-      url: "/api/dreams/" + id
+      url: "/api/delete/" + id
     })
       .then(function () {
         getDreams(dreamsCategorySelect.val());
