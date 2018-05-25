@@ -1,11 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "MySql12345!",
+    "password": "root",
     "database": "dreams_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "port": 3306
+    "port": 3307
   },
   "test": {
     "username": "root",
