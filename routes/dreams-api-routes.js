@@ -17,7 +17,7 @@ module.exports = function (app) {
     });
 
     //GET route for retrieving a single dream
-    app.get("/api", function (req, res) {
+    app.get("/api/dreams", function (req, res) {
         db.Dreams.findOne({
             where: {
                 id: re.params.id
