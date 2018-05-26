@@ -5,22 +5,29 @@ module.exports = function (app) {
 
     //GET route for getting all of the dreams
     app.get("/social-feed", function (req, res) {
-        var query = {};
-        if (req.query.user_id) {
-            query.userId = req.query.user_id;
-        }
-        db.Dreams.findAll({
-            where: query
+        db.Dream.findAll({
         }).then(function (dbDreams) {
             res.json(dbDreams);
         });
     });
 
+    // Get route for returning posts of a specific category
+    app.get("/social-feed/privacy/:privacy", function(req, res) {
+        db.Dream.findAll({
+        where: {
+            privacy: req.params.privacy
+        }
+        })
+        .then(function(dbPost) {
+            res.json(dbPost);
+        });
+    });
+
     //GET route for retrieving a single dream
-    app.get("/update/dream", function (req, res) {
-        db.Dreams.findOne({
+    app.get("/update-dream/:id", function (req, res) {
+        db.Dream.findOne({
             where: {
-                id: re.params.id
+                id: req.params.id
             }
         }).then(function (dbDreams) {
             console.log(dbDreams);
@@ -62,7 +69,7 @@ module.exports = function (app) {
     });
 
     // DELETE route for deleting Dream
-    app.delete("/api/delete", function (req, res) {
+    app.delete("/delete-dream/:id", function (req, res) {
         db.Dream.destroy({
             where: {
                 id: req.params.id
@@ -73,7 +80,7 @@ module.exports = function (app) {
     });
 
     //PUT route for updating Dream
-    app.put("/update/dream", function (req, res) {
+    app.put("/add-dream", function (req, res) {
         console.log(req.body);
         var textPolarity = "";
         var confPolarity = "";
