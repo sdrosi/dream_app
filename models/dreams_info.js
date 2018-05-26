@@ -26,7 +26,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Dream.associate = function(models) {
-    Dream.belongsTO(models.User, {
+    Dream.belongsTo(models.User, {
       foreignKey: {
         allowNull: false
       }
