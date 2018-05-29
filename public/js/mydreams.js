@@ -15,7 +15,9 @@ $(document).ready(function () {
       categoryString = "/privacy/" + categoryString;
       console.log("Category String:" + categoryString)
     }
+
     $.get("/my-feed" + categoryString, function (data) {
+
       console.log("Dreams", data);
       dreams = data;
       if (!dreams || !dreams.length) {

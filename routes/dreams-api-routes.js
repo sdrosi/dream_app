@@ -53,6 +53,7 @@ module.exports = function (app) {
 
     // POST route for saving a new Dream
     app.post("/add-dream", function(req, res) {
+
         console.log("User ID (Line 41 dreams-api-routes.js): " + req.user.id)
         console.log(req.body);
         var textPolarity = "";
@@ -77,6 +78,7 @@ module.exports = function (app) {
                 privacy: req.body.privacy,
                 polarity: textPolarity,
                 polarity_confidence: confPolarity,
+
                 UserId: req.user.id
             })
           .then(function(dbDream) {
