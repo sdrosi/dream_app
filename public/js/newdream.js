@@ -40,10 +40,12 @@ $(document).ready(function() {
     // If we're updating a post run updatePost to update a post
     // Otherwise run submitPost to create a whole new post
     if (updating) {
+      console.log("Updating post")
       newPost.id = postId;
       updatePost(newPost);
     }
     else {
+      console.log("Submitting new post")
       submitPost(newPost);
     }
   });
