@@ -5,12 +5,28 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+var session = require('express-session');
 var bodyParser = require("body-parser");
+var cookieSession = require('cookie-session');
+var passportSetup = require('./config/passport-setup');
+var passport = require('passport');
+var keys = require('./config/keys.js');
 
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8000;
+
+// Passport set up
+app.use(cookieSession({
+  maxAge: 1800000,
+  keys: [keys.session.cookieKey]
+}));
+
+
+app.use(passport.initialize());
+// express.session();
+app.use(passport.session());
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -22,6 +38,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+// Static directory
+app.use(express.static("public"));
+
+// Auth routes
+const authRoutes = require('./routes/auth-routes');
+app.use('/auth', authRoutes)
 
 // Static directory
 app.use(express.static("public"));
