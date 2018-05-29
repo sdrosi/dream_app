@@ -4,6 +4,7 @@
 //       });
 // }
 var path = require("path");
+const passport = require('passport');
 
 module.exports = function(app) {
     
@@ -13,18 +14,17 @@ module.exports = function(app) {
 
     app.get("/new-dream", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/newdream.html"));
-<<<<<<< HEAD
-        console.log("User ID (Line 17 HTML-api-routes): "+ req.User.id)
-=======
->>>>>>> parent of 6f63cbf... Figured out cookie manipulation so user id session persists throughout web app
+        console.log("User ID (Line 17 HTML-api-routes): "+ req.user.id)
       });
     
     // app.get("/update-dream", function(req, res) {
     // res.sendFile(path.join(__dirname, "../public/newdream.html"));
     // });
 
+
     app.get("/my-dreams", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/mydreams.html"));
+        // console.log(req.user.id)
     });
 
     app.get("/social-feed", function(req, res) {
