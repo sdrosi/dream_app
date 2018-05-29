@@ -15,7 +15,7 @@ $(document).ready(function () {
       categoryString = "/privacy/" + categoryString;
       console.log("Category String:" + categoryString)
     }
-    $.get("/social-feed" + categoryString, function (data) {
+    $.get("/my-dreams" + categoryString, function (data) {
       console.log("Dreams", data);
       dreams = data;
       if (!dreams || !dreams.length) {
