@@ -1,18 +1,33 @@
+require('dotenv').config();
 var db = require("../models");
-var keys = require("../config/aylien_keys.js");
+var keys = require("../config/keys.js");
 
 module.exports = function (app) {
 
     //GET route for getting all of the dreams
-    app.get("/social-feed", function (req, res) {
+    app.get("/social-feed/all", function (req, res) {
         db.Dream.findAll({
+            where: {
+                privacy: 0
+            }
+        }).then(function (dbDreams) {
+            res.json(dbDreams);
+        });
+    });
+
+    //GET route for getting all of the dreams
+    app.get("/my-feed/", function (req, res) {
+        db.Dream.findAll({
+            where: {
+                UserId: req.user.id
+            }
         }).then(function (dbDreams) {
             res.json(dbDreams);
         });
     });
 
     // Get route for returning posts of a specific category
-    app.get("/social-feed/privacy/:privacy", function(req, res) {
+    app.get("/my-feed/privacy/:privacy", function(req, res) {
         db.Dream.findAll({
         where: {
             UserId: req.user.id,
@@ -107,7 +122,8 @@ module.exports = function (app) {
             dream: req.body.dream,
             privacy: req.body.privacy,
             polarity: textPolarity,
-            polarity_confidence: confPolarity
+            polarity_confidence: confPolarity,
+            UserId: req.user.id
           },
           {
             where: {
