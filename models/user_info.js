@@ -16,8 +16,6 @@ module.exports = function(sequelize, DataTypes) {
     email: {
         type: DataTypes.STRING,
         allowNull: false,
-<<<<<<< HEAD
-=======
     },
     userName:{
         type: DataTypes.STRING,
@@ -26,7 +24,6 @@ module.exports = function(sequelize, DataTypes) {
     password: {
         type: DataTypes.STRING,
         allowNull: false
->>>>>>> 6c139a51799124e1378ce3010fdfc4cbe47aa7e7
     }
     });
   
