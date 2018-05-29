@@ -24,7 +24,7 @@ router.get('/dashboard')
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    console.log("uid:" + req.user.id)
+    console.log("uid:" + req.User.id)
     // res.redirect('/my-dreams')
     res.sendFile(path.join(__dirname, "../public/mydreams.html"));
     // res.json(req.user.id)

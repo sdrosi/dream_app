@@ -15,7 +15,7 @@ module.exports = function (app) {
     app.get("/social-feed/privacy/:privacy", function(req, res) {
         db.Dream.findAll({
         where: {
-            UserId: req.user.id,
+            UserId: req.User.id,
             privacy: req.params.privacy
         }
         })
@@ -38,7 +38,7 @@ module.exports = function (app) {
 
     // POST route for saving a new Dream
     app.post("/add-dream", function(req, res) {
-        console.log("User ID (Line 41 dreams-api-routes.js): " + req.user.id)
+        console.log("User ID (Line 41 dreams-api-routes.js): " + req.User.id)
         console.log(req.body);
         var textPolarity = "";
         var confPolarity = "";
@@ -62,7 +62,7 @@ module.exports = function (app) {
                 privacy: req.body.privacy,
                 polarity: textPolarity,
                 polarity_confidence: confPolarity,
-                UserId: req.user.id
+                UserId: req.User.id
             })
           .then(function(dbDream) {
             res.json(dbDream);

@@ -14,7 +14,7 @@ module.exports = function(app) {
 
     app.get("/new-dream", function(req, res) {
         res.sendFile(path.join(__dirname, "../public/newdream.html"));
-        console.log("User ID (Line 17 HTML-api-routes): "+ req.user.id)
+        console.log("User ID (Line 17 HTML-api-routes): "+ req.User.id)
       });
     
     // app.get("/update-dream", function(req, res) {
