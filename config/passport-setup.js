@@ -27,11 +27,10 @@ passport.use(new GoogleStrategy({
             });
             console.log("user is: " + user);
         } else {
-            console.log(email)
             var data =
                 {
-                    // firstName: email.name.givenName,
-                    // lastName: email.name.familyName,
+                    firstName: email.name.givenName,
+                    lastName: email.name.familyName,
                     email: email.emails[0].value
                 };
 
@@ -44,7 +43,7 @@ passport.use(new GoogleStrategy({
                 };
                 
             }).then((newUser) => {
-                console.log('new user created: ' + data.email);
+                console.log('new user created: ' + db.User.email);
             });
             
         }
@@ -55,19 +54,17 @@ passport.use(new GoogleStrategy({
 // serialize user
 passport.serializeUser(function(user, done) {
     done(null, user.id);
-    console.log("Serializing User")
     console.log(user.id);
 });
 
 // deserialize user
 passport.deserializeUser(function(id, done) {
-    db.User.findById(id).then(function(user) {
-        done(null, user)
-        // if (user) {
-        //     done(null, user.get());
-        // } else {
-        //     done(user.errors, null);
-        // }
+    user.findById(id).then(function(user) {
+        if (user) {
+            done(null, user.get());
+        } else {
+            done(user.errors, null);
+        }
     });
 });
 

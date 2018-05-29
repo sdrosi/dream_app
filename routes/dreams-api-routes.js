@@ -15,7 +15,10 @@ module.exports = function (app) {
     app.get("/social-feed/privacy/:privacy", function(req, res) {
         db.Dream.findAll({
         where: {
+<<<<<<< HEAD
             UserId: req.User.id,
+=======
+>>>>>>> parent of 6f63cbf... Figured out cookie manipulation so user id session persists throughout web app
             privacy: req.params.privacy
         }
         })
@@ -38,7 +41,10 @@ module.exports = function (app) {
 
     // POST route for saving a new Dream
     app.post("/add-dream", function(req, res) {
+<<<<<<< HEAD
         console.log("User ID (Line 41 dreams-api-routes.js): " + req.User.id)
+=======
+>>>>>>> parent of 6f63cbf... Figured out cookie manipulation so user id session persists throughout web app
         console.log(req.body);
         var textPolarity = "";
         var confPolarity = "";
@@ -61,8 +67,12 @@ module.exports = function (app) {
                 dream: req.body.dream,
                 privacy: req.body.privacy,
                 polarity: textPolarity,
+<<<<<<< HEAD
                 polarity_confidence: confPolarity,
                 UserId: req.User.id
+=======
+                polarity_confidence: confPolarity
+>>>>>>> parent of 6f63cbf... Figured out cookie manipulation so user id session persists throughout web app
             })
           .then(function(dbDream) {
             res.json(dbDream);
