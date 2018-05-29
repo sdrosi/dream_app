@@ -1,10 +1,8 @@
-<<<<<<< HEAD
-module.exports = function (app) {
-    app.get("/", function(req, res) {
-        res.sendFile(test.html);
-      });
-}
-=======
+// module.exports = function (app) {
+//     app.get("/", function(req, res) {
+//         res.sendFile(test.html);
+//       });
+// }
 var path = require("path");
 
 module.exports = function(app) {
@@ -30,4 +28,3 @@ module.exports = function(app) {
         res.sendFile(path.join(__dirname, "../public/dreamsfeed.html"));
     });
 };
->>>>>>> 6c139a51799124e1378ce3010fdfc4cbe47aa7e7

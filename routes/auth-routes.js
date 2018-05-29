@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const passport = require('passport');
 const db = require('../models');
+var path = require("path");
 
 // auth login
 router.get('/login', (req, res) => {
@@ -23,7 +24,7 @@ router.get('/dashboard')
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-    res.send("dreams home page");
+    res.sendFile(path.join(__dirname, "../public/mydreams.html"));
 });
 
 
