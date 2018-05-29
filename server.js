@@ -5,7 +5,12 @@
 // *** Dependencies
 // =============================================================
 var express = require("express");
+var session = require('express-session');
 var bodyParser = require("body-parser");
+var cookieSession = require('cookie-session');
+var passportSetup = require('./config/passport-setup');
+var passport = require('passport');
+var keys = require('./config/keys.js');
 
 // Sets up the Express App
 // =============================================================
@@ -13,10 +18,14 @@ var app = express();
 var PORT = process.env.PORT || 8000;
 
 // Passport set up
-const passportSetup = require('./config/passport-setup');
-const passport = require('passport');
+app.use(cookieSession({
+  maxAge: 1800000,
+  keys: [keys.session.cookieKey]
+}));
+
 
 app.use(passport.initialize());
+// express.session();
 app.use(passport.session());
 
 // Requiring our models for syncing
@@ -43,6 +52,7 @@ app.use(express.static("public"));
 // =============================================================
 require("./routes/dreams-api-routes.js")(app);
 require("./routes/html-api-routes.js")(app);
+
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
