@@ -10,7 +10,14 @@ var bodyParser = require("body-parser");
 // Sets up the Express App
 // =============================================================
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 8000;
+
+// Passport set up
+const passportSetup = require('./config/passport-setup');
+const passport = require('passport');
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -22,13 +29,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
-
 // Static directory
 app.use(express.static("public"));
 
-// // ROUTING
-require("./routes/dreams-api-routes.js")(app);
-require("./routes/html-api-routes.js")(app);
+// Auth routes
+const authRoutes = require('./routes/auth-routes');
+app.use('/auth', authRoutes)
+
+// Static directory
+app.use(express.static("public"));
 
 // Routes
 // =============================================================

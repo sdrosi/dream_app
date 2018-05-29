@@ -14,6 +14,6 @@ CREATE TABLE user_Info (
 );
 
 CREATE TABLE dreams_info (
-    id INT AUTO_INCREMENT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL
     
 );

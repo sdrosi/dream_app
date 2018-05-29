@@ -4,8 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Suite Dreams</title>
+        <link href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0/flatly/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
         <script src="https://code.jquery.com/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
         <link rel="stylesheet" type="text/css" href="css/style.css">
     
@@ -13,23 +15,29 @@
   <body>
 
 <!--navigation-->
-
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <!-- <a class="navbar-item" href="https://bulma.io"> -->
-        <img src="/photos/logo_2_black.png" alt="SuiteDreams Logo">
+        <a class="navbar-item" href="/my-dreams">
+        <img src="/photos/logo_2_black.png" alt="SuiteDreams Logo" width="112" height="28">
       </a>
   
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true">New Dream</span>
-        <span aria-hidden="true">My Dream</span>
-        <span aria-hidden="true">Social Feed</span>
+          <a class="navbar-item" href="/new-dream">
+            New Dream
+          </a>
+          <a class="navbar-item" href="/my-dreams">
+            My Dreams
+          </a>
+          <a class="navbar-item" href="/social-feed">
+            Social Feed
+          </a>
       </a>
     </div>
-</nav>
+  </nav>
+
 
 <!--hero-->
-  <section class="hero is-primary is-medium">
+  <section class="hero is-primary is-medium" id="hero-photo-one">
     <div class="hero-body">
     <div class="container">
       

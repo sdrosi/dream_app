@@ -8,8 +8,8 @@ $(document).ready(function() {
     // If we have this section in our url, we pull out the post id from the url
     // In localhost:8080/cms?post_id=1, postId is 1
     if (url.indexOf("?dream_id=") !== -1) {
-      postId = url.split("=")[1];
-      getPostData(postId);
+      userId = url.split("=")[1];
+      getUserData(userId);
     }
   
     // Getting jQuery references to the post body, title, form, and category select
