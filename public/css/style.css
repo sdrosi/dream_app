@@ -1,0 +1,17 @@
+#hero-photo-one {
+    background-image: url("/photos/hero_photo_one.jpg");
+
+}
+
+#hero-photo-two {
+    background-image: url("/photos/hero_image_four.jpg");
+
+}
+
+#card-body {
+    border: none;
+}
+
+#label-font {
+    color: white;
+}

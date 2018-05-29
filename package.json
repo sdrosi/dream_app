@@ -28,6 +28,10 @@
     "mysql2": "^1.5.3",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+<<<<<<< HEAD
     "sequelize": "^4.37.9"
+=======
+    "sequelize": "^4.37.7"
+>>>>>>> 6c139a51799124e1378ce3010fdfc4cbe47aa7e7
   }
 }

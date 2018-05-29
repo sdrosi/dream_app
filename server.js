@@ -10,6 +10,7 @@ var bodyParser = require("body-parser");
 // Sets up the Express App
 // =============================================================
 var app = express();
+<<<<<<< HEAD
 var PORT = process.env.PORT || 8000;
 
 // Passport set up
@@ -30,6 +31,9 @@ passport.deserializeUser(function(id, done) {
 
   
 
+=======
+var PORT = process.env.PORT || 8080;
+>>>>>>> 6c139a51799124e1378ce3010fdfc4cbe47aa7e7
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -41,6 +45,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // parse application/json
 app.use(bodyParser.json());
 
+<<<<<<< HEAD
 // Static directory
 app.use(express.static("public"));
 
@@ -55,6 +60,20 @@ require("./routes/dreams-api-routes.js")(app);
 // Auth routes
 const authRoutes = require('./routes/auth-routes');
 app.use('/auth', authRoutes)
+=======
+
+// Static directory
+app.use(express.static("public"));
+
+// // ROUTING
+require("./routes/dreams-api-routes.js")(app);
+require("./routes/html-api-routes.js")(app);
+
+// Routes
+// =============================================================
+require("./routes/dreams-api-routes.js")(app);
+require("./routes/html-api-routes.js")(app);
+>>>>>>> 6c139a51799124e1378ce3010fdfc4cbe47aa7e7
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
