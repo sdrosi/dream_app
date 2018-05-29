@@ -31,7 +31,6 @@ $(document).ready(function () {
     $.ajax({
       method: "DELETE",
       url: "/api/delete/" + id
-
     })
       .then(function () {
         getDreams(dreamsCategorySelect.val());
@@ -121,11 +120,11 @@ $(document).ready(function () {
     dreamContainer.append(messageH2);
   }
 
-  // This function handles reloading new dreams when the category changes
-  function handleCategoryChange() {
-    var newDreamCategory = $(this).val();
-    getDreams(newDreamCategory);
-  }
+  // // This function handles reloading new dreams when the category changes
+  // function handleCategoryChange() {
+  //   var newDreamCategory = $(this).val();
+  //   getDreams(newDreamCategory);
+  // }
 
 });
 
