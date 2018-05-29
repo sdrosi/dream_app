@@ -1,7 +1,7 @@
 
 DROP DATABASE IF EXISTS dreams_db;
 cREATE DATABASE dreams_db;
-USE DATABASE dreams_db;
+USE dreams_db;
 
 CREATE TABLE user_Info (
     id INT AUTO_INCREMENT NOT NULL,
@@ -14,6 +14,6 @@ CREATE TABLE user_Info (
 );
 
 CREATE TABLE dreams_info (
-    id INT AUTO_INCREMENT NOT NULL,
+    id INT AUTO_INCREMENT NOT NULL
     
 );
