@@ -24,12 +24,13 @@ router.get('/dashboard')
 
 // callback route for google to redirect to
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-<<<<<<< HEAD
-    console.log("uid:" + req.User.id)
+    console.log("uid:" + req.user.id)
     // res.redirect('/my-dreams')
-=======
->>>>>>> parent of 6f63cbf... Figured out cookie manipulation so user id session persists throughout web app
     res.sendFile(path.join(__dirname, "../public/mydreams.html"));
+    // res.json(req.user.id)
+    // res.render('user', {uid: req.user.id}, function(err, html) {
+
+    // })
 });
 
 
