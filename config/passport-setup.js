@@ -11,6 +11,10 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret
 
 }, (accessToken, refreshToken, email, done) => {
+    // passport callback function
+    //console.log(email);
+    //console.log(profile);
+
 
     db.User.findOne({
         where: {
@@ -24,6 +28,8 @@ passport.use(new GoogleStrategy({
             console.log(email)
             var data =
                 {
+                    // firstName: email.name.givenName,
+                    // lastName: email.name.familyName,
                     email: email.emails[0].value
                 };
 
