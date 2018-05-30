@@ -76,12 +76,12 @@ $(document).ready(function () {
     newDreamCardHeading.addClass("card-header");
 
     var deleteBtn = $("<td><button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete button is-danger is-inverted");
+    deleteBtn.text("X");
+    deleteBtn.addClass("button is-danger");
 
     var editBtn = $("<td><button is-primary is-inverted>");
     editBtn.text("EDIT");
-    editBtn.addClass("edit button is-primary is-inverted");
+    editBtn.addClass("button is-dark");
 
     var newDreamTitle = $("<td>");
     newDreamTitle.addClass("newPostTitle");
