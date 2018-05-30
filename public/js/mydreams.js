@@ -1,4 +1,12 @@
 $(document).ready(function () {
+
+  // var CHART = $("#myChart");
+  // var myPieChart = new Chart (CHART, {
+  //   type: 'pie',
+  //   data: data,
+  //   options: options
+  // })
+
   //dream container that holds all dreams posted.
   var dreamContainer = $("#dream-container");
   // Points to the dropdown menu for selecting what privacy setting to query 
