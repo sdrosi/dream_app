@@ -3,8 +3,13 @@ var db = require("../models");
 var keys = require("../config/keys.js");
 
 module.exports = function (app) {
+    
+    app.get("/logout", function (req, res) {
+        req.logout();
+        res.redirect('/')
+    })
 
-    //GET route for getting all public dreams among all users on the dreamsfeed.html page 
+    //GET route for getting all of the dreams
     app.get("/social-feed/all", function (req, res) {
         db.Dream.findAll({
             where: {
@@ -15,7 +20,7 @@ module.exports = function (app) {
         });
     });
 
-    //GET route for getting all of the user's dreams whether they are private or public. 
+    //GET route for getting all of the dreams
     app.get("/my-feed/", function (req, res) {
         db.Dream.findAll({
             where: {
@@ -26,7 +31,7 @@ module.exports = function (app) {
         });
     });
 
-    // Get route for returning dreams that matches the privacy category that the user selects on the my-dreams.html page
+    // Get route for returning posts of a specific category
     app.get("/my-feed/privacy/:privacy", function(req, res) {
         db.Dream.findAll({
         where: {
@@ -39,29 +44,23 @@ module.exports = function (app) {
         });
     });
 
-    //GET route for retrieving a single dream when the user wants to update a specific dream. The returned data
-    //autofills the new dream form with the user's previously inputted data as a result of this GET request.
-    app.get("/update-dream/:user_id/:id", function (req, res) {
-        if (req.user.id === req.params.user_id) {
-            db.Dream.findOne({
-                where: {
-                    id: req.params.id,
-                    UserId: req.params.user_id
-                }
-            }).then(function (dbDreams) {
-                console.log(dbDreams);
-                res.json(dbDreams);
-            });
-        }
-
-        else {
-            res.send("You can't edit that post")
-        }
-
+    //GET route for retrieving a single dream
+    app.get("/update-dream/:id", function (req, res) {
+        db.Dream.findOne({
+            where: {
+                id: req.params.id,
+                UserId: req.user.id
+            }
+        }).then(function (dbDreams) {
+            console.log(dbDreams);
+            res.json(dbDreams);
+        });
     });
 
     // POST route for saving a new Dream
     app.post("/add-dream", function(req, res) {
+        console.log("User ID (Line 41 dreams-api-routes.js): " + req.user.id)
+        console.log(req.body);
         var textPolarity = "";
         var confPolarity = "";
         var AYLIENTextAPI = require('aylien_textapi');
@@ -84,7 +83,6 @@ module.exports = function (app) {
                 privacy: req.body.privacy,
                 polarity: textPolarity,
                 polarity_confidence: confPolarity,
-
                 UserId: req.user.id
             })
           .then(function(dbDream) {

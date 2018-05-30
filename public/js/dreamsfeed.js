@@ -5,13 +5,12 @@ $(document).ready(function () {
   //click events for the edit and delete button
   $(document).on("click", "td.delete", handleDreamsDelete);
   $(document).on("click", "td.edit", handleDreamsEdit);
-  // privacySetting.on("change", handleCategoryChange);
+  privacySetting.on("change", handleCategoryChange);
   var dreams;
 
   // This function grabs dreams from the database and updates the view
   function getDreams(category) {
     var categoryString = category || "";
-    console.log(categoryString);
     if (categoryString) {
       categoryString = "/privacy/" + categoryString;
       console.log("Category String:" + categoryString)
@@ -19,12 +18,7 @@ $(document).ready(function () {
     $.get("/social-feed/all" + categoryString, function (data) {
       console.log("Dreams", data);
       dreams = data;
-      var allDreams =[];
-      for (var j = 0; j < dreams.length; j++) {
-        allDreams.push(dreams[j]);
-      } 
-      //if the privacy is set to private, display empty
-      if (allDreams.privacy === false) {
+      if (!dreams || !dreams.length) {
         displayEmpty();
       }
       else {
