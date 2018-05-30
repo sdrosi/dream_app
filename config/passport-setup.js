@@ -11,10 +11,6 @@ passport.use(new GoogleStrategy({
     clientSecret: keys.google.clientSecret
 
 }, (accessToken, refreshToken, email, done) => {
-    // passport callback function
-    //console.log(email);
-    //console.log(profile);
-
 
     db.User.findOne({
         where: {
@@ -22,16 +18,12 @@ passport.use(new GoogleStrategy({
         }
     }).then(function (user) {
         if (user) {
-            return done(null, false, {
-                message: 'user already exists'
-            });
             console.log("user is: " + user);
+            done(null, user)
         } else {
             console.log(email)
             var data =
                 {
-                    // firstName: email.name.givenName,
-                    // lastName: email.name.familyName,
                     email: email.emails[0].value
                 };
 
@@ -63,11 +55,6 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(id, done) {
     db.User.findById(id).then(function(user) {
         done(null, user)
-        // if (user) {
-        //     done(null, user.get());
-        // } else {
-        //     done(user.errors, null);
-        // }
     });
 });
 
