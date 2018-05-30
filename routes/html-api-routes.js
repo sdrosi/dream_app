@@ -12,21 +12,21 @@ module.exports = function(app) {
     app.get('/logout', function(req, res){
         req.logout();
         res.sendFile(path.join(__dirname, "../public/index.html"))
-    app.get("/new-dream", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/newdream.html"));
+    // app.get("/new-dream", function(req, res) {
+    //     res.sendFile(path.join(__dirname, "../public/newdream.html"));
 
-        console.log("User ID (Line 17 HTML-api-routes): "+ req.user.id)
+        // console.log("User ID (Line 17 HTML-api-routes): "+ req.user.id)
       });
     
     // At this route, it presents the new dream form
-    // app.get("/new-dream", function(req, res) {
-    //     if (req.user) {
-    //         res.sendFile(path.join(__dirname, "../public/newdream.html"));
-    //     }
+    app.get("/new-dream", function(req, res) {
+        if (req.user) {
+            res.sendFile(path.join(__dirname, "../public/newdream.html"));
+        }
 
-    //     else {
-    //         res.redirect('/')
-    //     }
+        else {
+            res.redirect('/')
+        }
 
     //   });
     
@@ -52,4 +52,4 @@ module.exports = function(app) {
             res.redirect('/')
         }
     });
-};
+})};
