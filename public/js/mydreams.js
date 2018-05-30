@@ -66,7 +66,8 @@ $(document).ready(function () {
       dreamPrivacy = "Public"
     }
     var polcon = dream.polarity_confidence;
-    console.log(polcon.toPrecision(2))
+    var formattedPolCon = (parseFloat(polcon)*100).toFixed(1)
+    console.log(typeof(dream.polarity_confidence));
 
     var newDreamCard = $("<tr>");
     newDreamCard.addClass("card");
@@ -93,11 +94,11 @@ $(document).ready(function () {
     newDreamPolarity.addClass("polarity")
 
     var newDreamPolarityConfidence = $("<td>");
-    newDreamPolarityConfidence.text("Polarity Confidence: " + polcon);
+    newDreamPolarityConfidence.text("Polarity Confidence: " + formattedPolCon + "%");
     newDreamPolarityConfidence.addClass("polarity_confidence")
 
     var newDreamCategory = $("<td>");
-    newDreamCategory.text(dreamPrivacy);
+    newDreamCategory.text("Dream Privacy: " + dreamPrivacy);
     newDreamCategory.addClass("dream-category")
 
     var newDreamCardBody = $("<td>");

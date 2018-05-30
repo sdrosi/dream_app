@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     polarity_confidence: {
-      type: DataTypes.DECIMAL
+      type: DataTypes.STRING
     }
 
   });
