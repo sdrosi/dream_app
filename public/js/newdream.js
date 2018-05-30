@@ -8,8 +8,8 @@ $(document).ready(function() {
   // If we have this section in our url, we pull out the post id from the url
   // In localhost:8080/cms?post_id=1, postId is 1
   if (url.indexOf("?dream_id=") !== -1) {
-    postId = url.split("=")[1];
-    getPostData(postId);
+    dreamId = url.split("=")[1];
+    getPostData(dreamId);
   }
 
   // Getting jQuery references to the post body, title, form, and category select
@@ -77,6 +77,10 @@ $(document).ready(function() {
         // If we have a post with this id, set a flag for us to know to update the post
         // when we hit submit
         updating = true;
+      }
+
+      else {
+        window.location.href = "/my-dreams"
       }
     });
   }

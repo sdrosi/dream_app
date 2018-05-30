@@ -48,7 +48,8 @@ module.exports = function (app) {
     app.get("/update-dream/:id", function (req, res) {
         db.Dream.findOne({
             where: {
-                id: req.params.id
+                id: req.params.id,
+                UserId: req.user.id
             }
         }).then(function (dbDreams) {
             console.log(dbDreams);
