@@ -96,6 +96,10 @@ $(document).ready(function () {
     newDreamPolarityConfidence.text("Polarity Confidence: " + formattedPolCon + "%");
     newDreamPolarityConfidence.addClass("polarity_confidence")
 
+    var dreamMood = $("<td>");
+    dreamMood.text("Mood: " + dream.mood);
+    dreamMood.addClass("newDreamMood");
+
     var newDreamCategory = $("<td>");
     newDreamCategory.text(dreamPrivacy);
     newDreamCategory.addClass("dream-category")
@@ -123,6 +127,7 @@ $(document).ready(function () {
     newDreamCardHeading.append(newDreamDate);
     newDreamCardHeading.append(newDreamPolarity);
     newDreamCardHeading.append(newDreamPolarityConfidence);
+    newDreamCardHeading.append(dreamMood);
     newDreamCardBody.append(newDreamTitle);
     newDreamCardBody.append(newDreamBody);
     newDreamCard.append(newDreamCardHeading);
