@@ -8,15 +8,32 @@ module.exports = function(app) {
     });
 
     app.get("/new-dream", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/newdream.html"));
+        if (req.user) {
+            res.sendFile(path.join(__dirname, "../public/newdream.html"));
+        }
+
+        else {
+            res.redirect("/")
+        }
       });
 
     app.get("/my-dreams", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/mydreams.html"));
-        // console.log(req.user.id)
+        if (req.user) {
+            res.sendFile(path.join(__dirname, "../public/mydreams.html"));
+        }
+
+        else {
+            res.redirect("/")
+        }
     });
 
     app.get("/social-feed", function(req, res) {
-        res.sendFile(path.join(__dirname, "../public/dreamsfeed.html"));
+        if (req.user) {
+            res.sendFile(path.join(__dirname, "../public/dreamsfeed.html"));
+        }
+
+        else {
+            res.redirect("/")
+        }
     });
 };
