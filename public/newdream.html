@@ -10,12 +10,13 @@
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
 <body  id="hero-photo-one">
-    <nav class="navbar is-black" id="navbar_black" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
       
           <a class="navbar-item" href="/my-dreams"><img src="/photos/logo_2_white.png" alt="SuiteDreams Logo" width="112" height="28"></a>
@@ -29,7 +30,7 @@
                 <div class="navbar-item">
                   <div class="field is-grouped">
                     <p class="control">
-                        <a class="bd-tw-button button" data-social-network="Google" data-social-action="google" data-social-target="http://localhost:4000" target="" href="/logout">
+                        <a class="button is-link is-outlined" data-social-network="Google" data-social-action="google" data-social-target="http://localhost:4000" target="" href="/logout">
                           <span class="icon">
                             <i class="fab fa-google"></i>
                           </span>
@@ -73,13 +74,30 @@
             <div class="form-group">
               <label for="category" id="label-font">Select Category:</label>
               <select class="custom-select" id="mood">
-                <option value="Happy">Happy</option>
-                <option value="Sad">Sad</option>
-                <!-- <option value="Political">Political</option> -->
+                  <option value="Anxious">Anxious</option>                
+                  <option value="Blissful">Blissful</option>
+                  <option value="Confused">Confused</option>
+                  <option value="Erotic">Erotic</option>
+                  <option value="Embarassed">Embarassed</option>
+                  <option value="Euphoria">Euphoria</option>
+                  <option value="Grief">Grief</option>
+                  <option value="Happy">Happy</option>
+                  <option value="Hilarious">Hilarious</option>
+                  <option value="Intense">Intense</option>
+                  <option value="Joy">Joy</option>
+                  <option value="Lonely">Lonely</option>
+                  <option value="Lost">Lost</option>
+                  <option value="Recurring">Recurring</option>
+                  <option value="Sad">Sad</option>
+                  <option value="Scared">Scared</option>
+                  <option value="Stressed">Stressed</option>
+                  <option value="Violent">Violent</option>
+                  <option value="Wild">Wild</option>
+                  <option value="Worried">Worried</option>
               </select>
             </div>
             <br />
-            <button type="submit" class="btn btn-success submit btn-lg">Submit</button>
+            <button type="submit" class="button is-medium is-link">Submit</button>
           </div>
         </form>
       </div>

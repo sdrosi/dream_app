@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  //dream container that holds all dreams posted.
+  //dream container that holds all dreams Dreamed.
   var dreamContainer = $("#dream-container");
   var privacySetting = $("#privacy");
   //click events for the edit and delete button
@@ -29,20 +29,20 @@ $(document).ready(function () {
 
 
   // This function does an API call to delete dreamss
-  function deleteDream(id) {
-    $.ajax({
-      method: "DELETE",
-      url: "/delete-dream/" + id
-    })
-      .then(function () {
-        getDreams(privacySetting.val());
-      });
-  }
+  // function deleteDream(id) {
+  //   $.ajax({
+  //     method: "DELETE",
+  //     url: "/delete-dream/" + id
+  //   })
+  //     .then(function () {
+  //       getDreams(privacySetting.val());
+  //     });
+  // }
 
   // Getting the initial list of dreams
   getDreams();
 
-  // InitializeRows handles appending all of our constructed post HTML inside
+  // InitializeRows handles appending all of our constructed Dream HTML inside
   // blogContainer
   function initializeRows() {
     dreamContainer.empty();
@@ -54,75 +54,86 @@ $(document).ready(function () {
   }
 
   // This function constructs a dream's HTML
-  function createNewRow(post) {
-    console.log(post);
-    var postPrivacy;
-    if (post.privacy === true) {
-      postPrivacy = "Private"
+  function createNewRow(dream) {
+    console.log(dream);
+    var dreamPrivacy;
+    if (dream.privacy === true) {
+      dreamPrivacy = "Private"
     }
-    else if (post.privacy === false) {
-      postPrivacy = "Public"
+    else if (dream.privacy === false) {
+      dreamPrivacy = "Public"
     }
 
-    var newPostCard = $("<tr>");
-    newPostCard.addClass("card");
+    var polcon = dream.polarity_confidence;
+    var formattedPolCon = (parseFloat(polcon)*100).toFixed(1)
+    console.log(typeof(dream.polarity_confidence));
 
-    var newPostCardHeading = $("<td>");
-    newPostCardHeading.addClass("card-header");
+    var newDreamCard = $("<tr>");
+    newDreamCard.addClass("card");
 
-    var deleteBtn = $("<td><button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete button is-danger is-inverted");
+    var newDreamCardHeading = $("<td>");
+    newDreamCardHeading.addClass("card-header");
 
-    var editBtn = $("<td><button is-primary is-inverted>");
-    editBtn.text("EDIT");
-    editBtn.addClass("edit button is-primary is-inverted");
+    // var deleteBtn = $("<td><button>");
+    // deleteBtn.text("x");
+    // deleteBtn.addClass("delete button is-danger is-inverted");
 
-    var newPostTitle = $("<td>");
-    newPostTitle.addClass("newPostTitle");
+    // var editBtn = $("<td><button is-primary is-inverted>");
+    // editBtn.text("EDIT");
+    // editBtn.addClass("edit button is-primary is-inverted");
 
-    var newPostDate = $("<td>");
-    newPostDate.addClass("post-date")
+    var newDreamTitle = $("<td>");
+    newDreamTitle.addClass("newDreamTitle");
 
-    var newPostCategory = $("<td>");
-    newPostCategory.text(postPrivacy);
-    newPostCategory.addClass("post-category")
+    var newDreamDate = $("<td>");
+    newDreamDate.addClass("dream-date")
 
-    var newPostCardBody = $("<td>");
-    newPostCardBody.addClass("card-body");
+    var newDreamPolarity = $("<td>");
+    newDreamPolarity.text("Polarity: " + dream.polarity);
+    newDreamPolarity.addClass("polarity")
 
-    var newPostBody = $("<td>");
-    newPostBody.addClass("post-body");
+    var newDreamPolarityConfidence = $("<td>");
+    newDreamPolarityConfidence.text("Polarity Confidence: " + formattedPolCon + "%");
+    newDreamPolarityConfidence.addClass("polarity_confidence")
 
-    newPostTitle.text(post.title + " ");
+    var newDreamCategory = $("<td>");
+    newDreamCategory.text(dreamPrivacy);
+    newDreamCategory.addClass("dream-category")
 
-    newPostBody.text(post.dream);
+    var newDreamCardBody = $("<td>");
+    newDreamCardBody.addClass("card-body");
 
-    var formattedDate = new Date(post.createdAt);
+    var newDreamBody = $("<td>");
+    newDreamBody.addClass("dream-body");
+
+    newDreamTitle.text(dream.title + " ");
+
+    newDreamBody.text(dream.dream);
+
+    var formattedDate = new Date(dream.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
-    newPostDate.text(formattedDate);
+    newDreamDate.text(formattedDate);
 
-    // newPostTitle.append(newPostDate);
+    // newdreamTitle.append(newDreamDate);
 
-    newPostCardHeading.append(deleteBtn);
-    newPostCardHeading.append(editBtn);
-    // newPostCardHeading.append(newPostTitle);
-    newPostCardHeading.append(newPostCategory);
-    newPostCardHeading.append(newPostDate);
+    // newDreamCardHeading.append(deleteBtn);
+    // newDreamCardHeading.append(editBtn);
+    // newDreamCardHeading.append(newDreamTitle);
+    newDreamCardHeading.append(newDreamCategory);
+    newDreamCardHeading.append(newDreamDate);
+    newDreamCardHeading.append(newDreamPolarity);
+    newDreamCardHeading.append(newDreamPolarityConfidence);
+    newDreamCardBody.append(newDreamTitle);
+    newDreamCardBody.append(newDreamBody);
+    newDreamCard.append(newDreamCardHeading);
+    newDreamCard.append(newDreamCardBody);
+    newDreamCard.data("dream", dream);
 
-
-    newPostCardBody.append(newPostTitle);
-    newPostCardBody.append(newPostBody);
-
-    newPostCard.append(newPostCardHeading);
-    newPostCard.append(newPostCardBody);
-    newPostCard.data("dream", post);
-
-    return newPostCard;
+    return newDreamCard;
   }
 
   // This function figures out which dream we want to delete and then calls
-  // deletePost
+  // deleteDream
   function handleDreamsDelete() {
     var currentDream = $(this)
     .parent()
@@ -145,7 +156,7 @@ $(document).ready(function () {
     dreamContainer.empty();
     var messageH2 = $("<h2>");
     messageH2.css({ "text-align": "center", "margin-top": "50px" });
-    messageH2.html("No posts yet for this category, navigate <a href='/cms'>here</a> in order to create a new dream.");
+    messageH2.html("No Dreams yet for this category, navigate <a href='/cms'>here</a> in order to create a new dream.");
     dreamContainer.append(messageH2);
   }
 

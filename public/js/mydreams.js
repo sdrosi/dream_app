@@ -12,8 +12,8 @@ $(document).ready(function () {
   // Points to the dropdown menu for selecting what privacy setting to query 
   var privacySetting = $("#privacy");
   //click events for the edit and delete button
-  $(document).on("click", "td.delete", handleDreamsDelete);
-  $(document).on("click", "td.edit", handleDreamsEdit);
+  $(document).on("click", "td.button-delete", handleDreamsDelete);
+  $(document).on("click", "td.button-edit", handleDreamsEdit);
   privacySetting.on("change", handlePrivacyChange);
   var dreams;
 
@@ -84,12 +84,12 @@ $(document).ready(function () {
     newDreamCardHeading.addClass("card-header");
 
     var deleteBtn = $("<td><button>");
-    deleteBtn.text("x");
-    deleteBtn.addClass("delete button is-danger is-inverted");
+    deleteBtn.text("X");
+    deleteBtn.addClass("button-delete is-danger");
 
     var editBtn = $("<td><button is-primary is-inverted>");
     editBtn.text("EDIT");
-    editBtn.addClass("edit button is-primary is-inverted");
+    editBtn.addClass("button-edit is-dark");
 
     var newDreamTitle = $("<td>");
     newDreamTitle.addClass("newPostTitle");
