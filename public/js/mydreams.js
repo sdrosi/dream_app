@@ -50,13 +50,14 @@ $(document).ready(function () {
     var dreamsToAdd = [];
     for (var i = 0; i < dreams.length; i++) {
       dreamsToAdd.push(createNewRow(dreams[i]));
+      console.log(dreams[i])
     }
     dreamContainer.append(dreamsToAdd);
   }
 
   // This function constructs a dream's HTML
   function createNewRow(dream) {
-    console.log(dream);
+    console.log(dream.polarity);
     var dreamPrivacy;
     if (dream.privacy === true) {
       dreamPrivacy = "Private"
@@ -64,6 +65,8 @@ $(document).ready(function () {
     else if (dream.privacy === false) {
       dreamPrivacy = "Public"
     }
+    var polcon = dream.polarity_confidence;
+    console.log(polcon.toPrecision(2))
 
     var newDreamCard = $("<tr>");
     newDreamCard.addClass("card");
@@ -84,6 +87,14 @@ $(document).ready(function () {
 
     var newDreamDate = $("<td>");
     newDreamDate.addClass("dream-date")
+
+    var newDreamPolarity = $("<td>");
+    newDreamPolarity.text("Polarity: " + dream.polarity);
+    newDreamPolarity.addClass("polarity")
+
+    var newDreamPolarityConfidence = $("<td>");
+    newDreamPolarityConfidence.text("Polarity Confidence: " + polcon);
+    newDreamPolarityConfidence.addClass("polarity_confidence")
 
     var newDreamCategory = $("<td>");
     newDreamCategory.text(dreamPrivacy);
@@ -110,6 +121,8 @@ $(document).ready(function () {
     // newPostCardHeading.append(newPostTitle);
     newDreamCardHeading.append(newDreamCategory);
     newDreamCardHeading.append(newDreamDate);
+    newDreamCardHeading.append(newDreamPolarity);
+    newDreamCardHeading.append(newDreamPolarityConfidence);
 
 
     newDreamCardBody.append(newDreamTitle);
