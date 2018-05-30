@@ -15,7 +15,11 @@
 
 #hero-photo-two {
     background-image: url("/photos/hero_image_four.jpg");
-
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
 }
 
 #card-body {
