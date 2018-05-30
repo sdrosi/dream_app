@@ -12,19 +12,23 @@ module.exports = function(app) {
     app.get('/logout', function(req, res){
         req.logout();
         res.sendFile(path.join(__dirname, "../public/index.html"))
+    app.get("/new-dream", function(req, res) {
+        res.sendFile(path.join(__dirname, "../public/newdream.html"));
+
+        console.log("User ID (Line 17 HTML-api-routes): "+ req.user.id)
       });
     
     // At this route, it presents the new dream form
-    app.get("/new-dream", function(req, res) {
-        if (req.user) {
-            res.sendFile(path.join(__dirname, "../public/newdream.html"));
-        }
+    // app.get("/new-dream", function(req, res) {
+    //     if (req.user) {
+    //         res.sendFile(path.join(__dirname, "../public/newdream.html"));
+    //     }
 
-        else {
-            res.redirect('/')
-        }
+    //     else {
+    //         res.redirect('/')
+    //     }
 
-      });
+    //   });
     
     // After authentication and whenever the user routes to this URL, it will present the my-dreams html file
     app.get("/my-dreams", function(req, res) {

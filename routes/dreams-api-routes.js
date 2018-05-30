@@ -84,6 +84,7 @@ module.exports = function (app) {
                 privacy: req.body.privacy,
                 polarity: textPolarity,
                 polarity_confidence: confPolarity,
+
                 UserId: req.user.id
             })
           .then(function(dbDream) {
