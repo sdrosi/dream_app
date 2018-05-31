@@ -1,4 +1,39 @@
 $(document).ready(function () {
+
+  function createChart(positive, negative, neutral) {
+  
+    var ctx = $("#myChart");
+    var myChart = new Chart(ctx, {
+      type: 'polarArea',
+      data: {
+          labels: ["Positive", "Negative", "Neutral"],
+          datasets: [{
+              label: '# of Votes',
+              data: [positive, negative, neutral],
+              backgroundColor: [
+                  'rgba(75, 192, 192, 0.5)',
+                  'rgba(255, 99, 132, 0.5)',
+                  'rgba(54, 162, 235, 0.5)'
+              ],
+              borderColor: [
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+        legend: {
+          labels: {
+            fontColor: "white",
+            fontSize: 20
+          }
+        }
+      }
+  });
+};
+
   //dream container that holds all dreams posted.
   var dreamContainer = $("#dream-container");
   // Points to the dropdown menu for selecting what privacy setting to query 
@@ -44,14 +79,32 @@ $(document).ready(function () {
   getDreams();
 
   // InitializeRows handles appending all of our constructed post HTML inside
-  // blogContainer
   function initializeRows() {
     dreamContainer.empty();
     var dreamsToAdd = [];
+    var positiveDreams = 0;
+    var negativeDreams = 0;
+    var neutralDreams = 0;
     for (var i = 0; i < dreams.length; i++) {
       dreamsToAdd.push(createNewRow(dreams[i]));
       console.log(dreams[i])
+      if(dreams[i].polarity === "positive") {
+        positiveDreams++;
+      }
+
+      else if (dreams[i].polarity === "negative") {
+        negativeDreams++;
+      }
+
+      else if (dreams[i].polarity === "neutral") {
+        neutralDreams++;
+      }
+
+      else {
+        continue
+      }
     }
+    createChart(positiveDreams, negativeDreams, neutralDreams);
     dreamContainer.append(dreamsToAdd);
   }
 
@@ -72,7 +125,7 @@ $(document).ready(function () {
     var newDreamCard = $("<tr>");
     newDreamCard.addClass("card");
 
-    var newDreamCardHeading = $("<td>");
+    var newDreamCardHeading = $("<td><b>");
     newDreamCardHeading.addClass("card-header");
 
     var deleteBtn = $("<td><button>");
