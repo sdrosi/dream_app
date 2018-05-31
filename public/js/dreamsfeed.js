@@ -10,12 +10,11 @@ $(document).ready(function () {
 
   // This function grabs dreams from the database and updates the view
   function getDreams(category) {
-    var categoryString = category || "";
-    if (categoryString) {
-      categoryString = "/privacy/" + categoryString;
-      console.log("Category String:" + categoryString)
+    var privacyString = category || "";
+    if (privacyString) {
+      privacyString = "/privacy/" + privacyString;
     }
-    $.get("/social-feed/all" + categoryString, function (data) {
+    $.get("/social-feed/all" + privacyString, function (data) {
       console.log("Dreams", data);
       dreams = data;
       if (!dreams || !dreams.length) {
@@ -27,23 +26,10 @@ $(document).ready(function () {
     });
   }
 
-
-  // This function does an API call to delete dreamss
-  // function deleteDream(id) {
-  //   $.ajax({
-  //     method: "DELETE",
-  //     url: "/delete-dream/" + id
-  //   })
-  //     .then(function () {
-  //       getDreams(privacySetting.val());
-  //     });
-  // }
-
   // Getting the initial list of dreams
   getDreams();
 
   // InitializeRows handles appending all of our constructed Dream HTML inside
-  // blogContainer
   function initializeRows() {
     dreamContainer.empty();
     var dreamsToAdd = [];
@@ -74,14 +60,6 @@ $(document).ready(function () {
     var newDreamCardHeading = $("<td>");
     newDreamCardHeading.addClass("card-header");
 
-    // var deleteBtn = $("<td><button>");
-    // deleteBtn.text("x");
-    // deleteBtn.addClass("delete button is-danger is-inverted");
-
-    // var editBtn = $("<td><button is-primary is-inverted>");
-    // editBtn.text("EDIT");
-    // editBtn.addClass("edit button is-primary is-inverted");
-
     var newDreamTitle = $("<td>");
     newDreamTitle.addClass("newDreamTitle");
 
@@ -101,7 +79,7 @@ $(document).ready(function () {
     dreamMood.addClass("newDreamMood");
 
     var newDreamCategory = $("<td>");
-    newDreamCategory.text(dreamPrivacy);
+    newDreamCategory.text("Dream Privacy: " + dreamPrivacy);
     newDreamCategory.addClass("dream-category")
 
     var newDreamCardBody = $("<td>");
@@ -117,12 +95,6 @@ $(document).ready(function () {
     var formattedDate = new Date(dream.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     newDreamDate.text(formattedDate);
-
-    // newdreamTitle.append(newDreamDate);
-
-    // newDreamCardHeading.append(deleteBtn);
-    // newDreamCardHeading.append(editBtn);
-    // newDreamCardHeading.append(newDreamTitle);
     newDreamCardHeading.append(newDreamCategory);
     newDreamCardHeading.append(newDreamDate);
     newDreamCardHeading.append(newDreamPolarity);
