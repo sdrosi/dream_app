@@ -1,1 +1,11 @@
 # dream_app
+
+Dreams can captivate the mind for what seems like hours but the length of a dream can vary; they may last for a few seconds, or approximately 20–30 minutes. People are more likely to remember the dream if they are awakened during the REM phase. The average person has three to five dreams per night, but some may have up to seven dreams in one night. Additionally, 95% of all dreams are quickly forgotten shortly after waking up. One theory suggests that we don't remember most of our dreams because the changes in the brain that occur during sleep do not support the information processing and storage needed for memory formation to take place. 
+
+So given these challenges, how does one keep track of their dreams? Introducing Suite Dreams. The app where you and your community can record and share your dreams. 
+
+Using Passport.js to log in and authenticate, Suite Dreams has never been easier to sign up and use. Simply log in with your desired Google account and you're ready to go. 
+
+Upon authentication, the user is brought to the main "My Dreams" page. This is where all of your recorded dreams will be housed and stored. Users will also be given the option to click "New Dream" to record a new dream right after authentication. The user will fill out our simple form while the back end database takes care of the rest. Once the user submits the form, we use JawsDB to store to a MySQL database your dreams along with some other unique data values. While the data is in the process of being stored to the database, we also make an API call to the Aylien Sentiment Analysis API which analyzes your dream, and gives it a polarity connotation (positive, negative, or neutral) along with a polarity confidence. 
+
+After submission, the user is redirected back to their dreams page where all their dreams (public or private) are displayed based on the dropdown filter option. Additionally a polar area chart using Chart.js gives a visual sense of how much you're dreaming and what kind of dreams you're having based on the Aylien Sentiment Analysis API. Similarly, the user can click the "Social Feed" navigation bar link to be redirected to a new page where all public posts are displayed among all users. 
