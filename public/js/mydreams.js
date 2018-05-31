@@ -171,12 +171,8 @@ $(document).ready(function () {
     var formattedDate = new Date(dream.createdAt);
     formattedDate = moment(formattedDate).format("MMMM Do YYYY, h:mm:ss a");
     newDreamDate.text(formattedDate);
-
-    // newPostTitle.append(newPostDate);
-
     newDreamCardHeading.append(deleteBtn);
     newDreamCardHeading.append(editBtn);
-    // newPostCardHeading.append(newPostTitle);
     newDreamCardHeading.append(newDreamCategory);
     newDreamCardHeading.append(newDreamDate);
     newDreamCardHeading.append(newDreamPolarity);
@@ -202,6 +198,7 @@ $(document).ready(function () {
     .parent()
     .data("dream");
     deleteDream(currentDream.id);
+    window.location.href = "/my-dreams";
   }
   // This function figures out which dream we want to edit and takes it to the
   // Appropriate url
