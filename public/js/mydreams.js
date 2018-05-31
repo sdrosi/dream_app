@@ -143,11 +143,11 @@ $(document).ready(function () {
     newDreamDate.addClass("dream-date")
 
     var newDreamPolarity = $("<td>");
-    newDreamPolarity.text("Polarity: " + dream.polarity);
+    newDreamPolarity.text("Sentiment: " + dream.polarity);
     newDreamPolarity.addClass("polarity")
 
     var newDreamPolarityConfidence = $("<td>");
-    newDreamPolarityConfidence.text("Polarity Confidence: " + formattedPolCon + "%");
+    newDreamPolarityConfidence.text("Sentiment Confidence: " + formattedPolCon + "%");
     newDreamPolarityConfidence.addClass("polarity_confidence")
 
     var dreamMood = $("<td>");
