@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   if (url.indexOf("?dream_id=") !== -1) {
     dreamId = url.split("=")[1];
-    getPostData(dreamId);
+    getDreamData(dreamId);
   }
 
   // Getting jQuery references to the the form fields
